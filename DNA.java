@@ -1,13 +1,14 @@
 
 import java.io.*;
-import java.security.cert.CollectionCertStoreParameters;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class DNA {
 
   private static HashMap<Character, Integer> map = new HashMap<Character, Integer>();
-  private static List<String> in = new LinkedList<String>();
+
+  private static List<String> input = new LinkedList<String>();
+  private static List<Integer> in = new LinkedList<Integer>();
 
   public static void main(String[] args) {
     setup();
@@ -17,6 +18,14 @@ public class DNA {
     // }
 
     readFromInput();
+
+    for (Integer i : in) {
+      System.out.println(i);
+    }
+
+    for (String i : input) {
+      System.out.println(i);
+    }
   }
 
   public static void DivideAndConquer() {
@@ -45,22 +54,20 @@ public class DNA {
         if (isFirst) {
           List<Integer> key = Collections.list(new StringTokenizer(read, " ")).stream()
               .map(token -> Integer.parseInt((String) token)).collect(Collectors.toList());
-          for (Integer i : key) {
-            System.out.println(i);
-          }
+
+          in = key;
           isFirst = false;
           continue;
         }
 
         // Not first line
-        List<String> input = Collections.list(new StringTokenizer(read)).stream().map(token -> (String) token)
+        List<String> val = Collections.list(new StringTokenizer(read)).stream().map(token -> (String) token)
             .collect(Collectors.toList());
-        for (String i : input) {
-          System.out.println(i);
-        }
+        input.addAll(val);
       }
 
       infile.close();
+
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
