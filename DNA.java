@@ -18,14 +18,24 @@ public class DNA {
     // System.out.println(i);
     // }
 
-    // for (String i : input) {
-    // System.out.println(i);
-    // }
+    String[] slice = input.get(2).split("");
+
+    System.out.println("Before sort");
+    for (String i : slice) {
+      System.out.println(i);
+    }
+    DivideAndConquer(slice);
+
+    System.out.println("After sort");
+    for (String i : slice) {
+      System.out.println(i);
+    }
   }
 
   public static void sort() {
     for (String i : input) {
       DivideAndConquer(i.split(""));
+      break;
     }
   }
 
@@ -39,7 +49,7 @@ public class DNA {
 
     for (int i = 0; i < mid; i++)
       l[i] = data[i];
-    for (int i = 0; i < data.length; i++)
+    for (int i = mid; i < data.length; i++)
       r[i - mid] = data[i];
 
     DivideAndConquer(l);
@@ -60,8 +70,12 @@ public class DNA {
         arr[mpoint++] = left[lpoint++];
       else
         arr[mpoint++] = right[rpoint++];
-
     }
+
+    while (lpoint < l)
+      arr[rpoint++] = left[lpoint++];
+    while (rpoint < r)
+      arr[mpoint++] = right[rpoint++];
   }
 
   public static void BruteForce() {
