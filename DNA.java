@@ -28,7 +28,7 @@ public class DNA {
   public static int check(String[] sorted, String[] unsorted) {
     int count = 0;
     for (int i = 0; i < sorted.length; i++) {
-      if (sorted[i] != unsorted[i])
+      if (!sorted[i].equalsIgnoreCase(unsorted[i]))
         count++;
     }
     return count;
