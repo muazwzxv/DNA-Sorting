@@ -10,7 +10,7 @@ public class DNA {
   private static List<String> input = new LinkedList<String>();
   private static List<Integer> in = new LinkedList<Integer>();
 
-  private static HashMap<Integer, String> solved = new HashMap<Integer, String>();
+  private static HashMap<String, Integer> solved = new HashMap<String, Integer>();
 
   public static void main(String[] args) {
     setup();
@@ -20,7 +20,7 @@ public class DNA {
       slice = i.split("");
       DivideAndConquer(slice);
       int diff = check(slice, i.split(""));
-      solved.put(diff, String.join("", slice));
+      solved.put(String.join("", slice), diff);
     }
     System.out.println(solved);
   }
