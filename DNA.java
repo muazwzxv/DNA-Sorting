@@ -9,27 +9,27 @@ public class DNA {
 
   private static List<String> input = new LinkedList<String>();
   private static List<Integer> in = new LinkedList<Integer>();
+  private static List<String> solved = new LinkedList<String>();
 
   public static void main(String[] args) {
     setup();
     readFromInput();
 
-    // for (Integer i : in) {
-    // System.out.println(i);
-    // }
-
-    String[] slice = input.get(2).split("");
-
-    System.out.println("Before sort");
-    for (String i : slice) {
-      System.out.println(i);
+    for (String i : input) {
+      String[] slice = i.split("");
+      DivideAndConquer(slice);
+      int diff = check(slice, i.split(""));
     }
-    DivideAndConquer(slice);
+  }
 
-    System.out.println("After sort");
-    for (String i : slice) {
-      System.out.println(i);
-    }
+  public static int check(String[] sorted, String[] unsorted) {
+    int count = 0;
+    for (String i : sorted)
+      for (String j : unsorted)
+        if (i != j)
+          count++;
+
+    return count;
   }
 
   public static void sort() {
@@ -76,10 +76,6 @@ public class DNA {
       arr[rpoint++] = left[lpoint++];
     while (rpoint < r)
       arr[mpoint++] = right[rpoint++];
-  }
-
-  public static void BruteForce() {
-
   }
 
   public static void setup() {
