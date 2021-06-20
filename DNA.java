@@ -9,26 +9,28 @@ public class DNA {
 
   private static List<String> input = new LinkedList<String>();
   private static List<Integer> in = new LinkedList<Integer>();
-  private static List<String> solved = new LinkedList<String>();
+
+  private static HashMap<Integer, String> solved = new HashMap<Integer, String>();
 
   public static void main(String[] args) {
     setup();
     readFromInput();
-
+    String[] slice;
     for (String i : input) {
-      String[] slice = i.split("");
+      slice = i.split("");
       DivideAndConquer(slice);
       int diff = check(slice, i.split(""));
+      solved.put(diff, String.join("", slice));
     }
+    System.out.println(solved);
   }
 
   public static int check(String[] sorted, String[] unsorted) {
     int count = 0;
-    for (String i : sorted)
-      for (String j : unsorted)
-        if (i != j)
-          count++;
-
+    for (int i = 0; i < sorted.length; i++) {
+      if (sorted[i] != unsorted[i])
+        count++;
+    }
     return count;
   }
 
