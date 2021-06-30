@@ -10,30 +10,39 @@ public class DNA {
   private static List<String> input = new LinkedList<String>();
   private static List<Integer> in = new LinkedList<Integer>();
 
-  private static HashMap<String, Integer> solved = new HashMap<String, Integer>();
+  private static List<Solved> result = new LinkedList<Solved>();
 
   public static void main(String[] args) {
     setup();
     readFromInput();
 
     for (String i : input) {
+      System.out.println(i + " what is i");
       String[] slice = i.split("");
+      String original = String.join("", slice);
 
       for (String j : slice)
         System.out.print(j);
-      System.out.print("\n");
+      System.out.print(" what is slice \n");
 
-      quicksort(slice);
+      selectionSort(slice);
+      for (String j : slice)
+        System.out.print(j);
+      System.out.println(" After sorted \n");
+
+      System.out.println(String.join("", slice) + " Join using String method \n");
       int diff = check(slice, i.split(""));
-      solved.put(String.join("", slice), diff);
+
+      Solved data = new Solved(original, String.join("", slice), diff);
+      result.add(data);
     }
 
-    System.out.println(" \n Sorted");
-    for (Map.Entry<String, Integer> entry : solved.entrySet())
-      System.out.println("Key = " + entry.getKey() + ", Values = " + entry.getValue());
+    System.out.println("Sorted \n");
+    for (Solved ele : result)
+      System.out.println(ele.toString());
   }
 
-  public static void quicksort(String[] arr) {
+  public static void selectionSort(String[] arr) {
     for (int i = 0; i < arr.length; i++) {
       int pointer = i;
       for (int j = i + 1; j < arr.length; j++) {
@@ -127,12 +136,19 @@ public class DNA {
   // int mpoint = 0;
 
   // while (lpoint < l && rpoint < r) {
-  // int ldata = map.get((left[lpoint]).charAt(0));
-  // int rdata = map.get((right[rpoint]).charAt(0));
-  // if (ldata <= rdata)
+  // // int ldata = map.get((left[lpoint]).charAt(0));
+  // // int rdata = map.get((right[rpoint]).charAt(0));
+
+  // char data1 = left[lpoint].charAt(0);
+  // char data2 = right[rpoint].charAt(0);
+  // if (Character.compare(data1, data2) <= 0)
   // arr[mpoint++] = left[lpoint++];
   // else
   // arr[mpoint++] = right[rpoint++];
+  // // if (ldata <= rdata)
+  // // arr[mpoint++] = left[lpoint++];
+  // // else
+  // // arr[mpoint++] = right[rpoint++];
   // }
 
   // while (lpoint < l)
@@ -140,5 +156,4 @@ public class DNA {
   // while (rpoint < r)
   // arr[mpoint++] = right[rpoint++];
   // }
-
 }
