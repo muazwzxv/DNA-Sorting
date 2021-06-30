@@ -5,32 +5,21 @@ import java.util.stream.Collectors;
 
 public class DNA {
 
-  private static HashMap<Character, Integer> map = new HashMap<Character, Integer>();
-
   private static List<String> input = new LinkedList<String>();
-  private static List<Integer> in = new LinkedList<Integer>();
-
+  private static List<Integer> mn = new LinkedList<Integer>();
   private static List<Solved> result = new LinkedList<Solved>();
 
   public static void main(String[] args) {
-    setup();
     readFromInput();
 
     for (String i : input) {
-      System.out.println(i + " what is i");
       String[] slice = i.split("");
       String original = String.join("", slice);
 
-      for (String j : slice)
-        System.out.print(j);
-      System.out.print(" what is slice \n");
-
+      // Sort string
       selectionSort(slice);
-      for (String j : slice)
-        System.out.print(j);
-      System.out.println(" After sorted \n");
 
-      System.out.println(String.join("", slice) + " Join using String method \n");
+      // Find transition
       int diff = check(slice, i.split(""));
 
       Solved data = new Solved(original, String.join("", slice), diff);
@@ -53,7 +42,7 @@ public class DNA {
         char data2 = arr[pointer].charAt(0);
 
         // System.out.println("Compare " + data1 + " and " + data2);
-        if (Character.compare(data1, data2) < 0)
+        if (Character.compare(data1, data2) <= 0)
           pointer = j;
       }
       String smol = arr[pointer];
@@ -73,13 +62,6 @@ public class DNA {
     return count;
   }
 
-  public static void setup() {
-    map.put('A', 1);
-    map.put('C', 2);
-    map.put('G', 3);
-    map.put('T', 4);
-  }
-
   public static void readFromInput() {
     try {
       boolean isFirst = true;
@@ -92,11 +74,10 @@ public class DNA {
           List<Integer> key = Collections.list(new StringTokenizer(read, " ")).stream()
               .map(token -> Integer.parseInt((String) token)).collect(Collectors.toList());
 
-          in = key;
+          mn = key;
           isFirst = false;
           continue;
         }
-
         // Not first line
         List<String> val = Collections.list(new StringTokenizer(read)).stream().map(token -> (String) token)
             .collect(Collectors.toList());
