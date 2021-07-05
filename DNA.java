@@ -7,28 +7,31 @@ public class DNA {
 
   private static List<String> input = new LinkedList<String>();
   private static List<Integer> mn = new LinkedList<Integer>();
-  private static List<Solved> result = new LinkedList<Solved>();
+  private static HashMap<Integer, Solved> result = new HashMap<Integer, Solved>();
 
   public static void main(String[] args) {
     readFromInput();
 
+    System.out.println("input");
     for (String i : input) {
       String[] slice = i.split("");
       String original = String.join("", slice);
 
+      System.out.println(original);
       // Sort string
       selectionSort(slice);
 
       // Find transition
       int diff = check(slice, i.split(""));
-
       Solved data = new Solved(original, String.join("", slice), diff);
-      result.add(data);
+
+      result.put(diff, data);
     }
 
-    System.out.println("Sorted \n");
-    for (Solved ele : result)
-      System.out.println(ele.toString());
+    System.out.println("\nSorted");
+    for (Solved ele : result.values()) {
+      System.out.println(ele.original);
+    }
   }
 
   public static void selectionSort(String[] arr) {
@@ -90,51 +93,4 @@ public class DNA {
       System.out.println(e.getMessage());
     }
   }
-
-  // public static void DivideAndConquer(String[] data) {
-  // if (data.length < 2)
-  // return;
-
-  // int mid = data.length / 2;
-  // String[] l = new String[mid];
-  // String[] r = new String[data.length - mid];
-
-  // for (int i = 0; i < mid; i++)
-  // l[i] = data[i];
-  // for (int i = mid; i < data.length; i++)
-  // r[i - mid] = data[i];
-
-  // DivideAndConquer(l);
-  // DivideAndConquer(r);
-
-  // merge(data, l, r, mid, data.length - mid);
-  // }
-
-  // public static void merge(String arr[], String left[], String right[], int l,
-  // int r) {
-  // int lpoint = 0;
-  // int rpoint = 0;
-  // int mpoint = 0;
-
-  // while (lpoint < l && rpoint < r) {
-  // // int ldata = map.get((left[lpoint]).charAt(0));
-  // // int rdata = map.get((right[rpoint]).charAt(0));
-
-  // char data1 = left[lpoint].charAt(0);
-  // char data2 = right[rpoint].charAt(0);
-  // if (Character.compare(data1, data2) <= 0)
-  // arr[mpoint++] = left[lpoint++];
-  // else
-  // arr[mpoint++] = right[rpoint++];
-  // // if (ldata <= rdata)
-  // // arr[mpoint++] = left[lpoint++];
-  // // else
-  // // arr[mpoint++] = right[rpoint++];
-  // }
-
-  // while (lpoint < l)
-  // arr[rpoint++] = left[lpoint++];
-  // while (rpoint < r)
-  // arr[mpoint++] = right[rpoint++];
-  // }
 }
